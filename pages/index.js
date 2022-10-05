@@ -35,10 +35,31 @@ export default function Home() {
         <meta name="theme-color" content="#ffffff" />
       </Head>
 
-      <main className="mx-auto max-w-3xl px-4 pt-20">
-        <h1 className="bg-gradient-to-r bg-clip-text text-transparent from-tertiary to-secondary via-primary">
+      <main className="max-w-3xl px-4 pt-20 mx-auto">
+        <h1 className="text-transparent bg-gradient-to-r bg-clip-text from-tertiary to-secondary via-primary">
           Tailwind Material Colors
         </h1>
+        <ul className="flex items-center justify-center gap-3 mb-12 font-bold">
+          <li>
+            <a
+              href="https://npmjs.com/package/tailwind-material-colors"
+              target="_blank"
+              rel="noreferrer"
+            >
+              npm
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://github.com/JavierM42/tailwind-material-colors"
+              target="_blank"
+              rel="noreferrer"
+            >
+              GitHub
+            </a>
+          </li>
+        </ul>
+
         <p>
           A{" "}
           <a href="https://tailwindcss.com" target="_blank" rel="noreferrer">
@@ -50,8 +71,9 @@ export default function Home() {
           </a>{" "}
           Color System with Tailwind, with Dynamic Color support.
         </p>
+
         <h2>Key features</h2>
-        <ul className="list-disc space-y-2">
+        <ul className="space-y-2 list-disc">
           <li>Generate a color theme from one, two or three base colors.</li>
           <li>
             Automatic dark mode, no need to use the <code>dark:</code> variant.
@@ -73,10 +95,10 @@ export default function Home() {
         <pre>
           <code>npm install --save-dev tailwind-material-colors</code>
         </pre>
-        <div className="text-lg font-bold text-tertiary font-mono rounded-t bg-surface-variant inline-block px-2 py-1 mt-6 border-b border-outline/20">
+        <div className="inline-block px-2 py-1 mt-6 font-mono text-lg font-bold border-b rounded-t text-tertiary bg-surface-variant border-outline/20">
           tailwind.config.js
         </div>
-        <code className="bg-surface-variant text-secondary block rounded-tl-none mb-6 shadow-inner">
+        <code className="block mb-6 rounded-tl-none shadow-inner bg-surface-variant text-secondary">
           <div>{"module.exports = require('tailwind-material-colors')({"}</div>
           <div className="pl-6 text-outline/70">
             // Here, your tailwind config.
@@ -141,13 +163,13 @@ export default function Home() {
               <code>on-primary-container</code>.
             </p>
           </div>
-          <div className="relative flex-1 bg-primary-container w-1/2 px-2 py-1 flex flex-col items-center justify-center">
+          <div className="relative flex flex-col items-center justify-center flex-1 w-1/2 px-2 py-1 bg-primary-container">
             <div>Default content (on-primary-container)</div>
             <div className="text-outline">
               Content with <span className="font-mono">.text-outline</span>{" "}
               class
             </div>
-            <div className="absolute bottom-2 right-2 text-xs">
+            <div className="absolute text-xs bottom-2 right-2">
               .bg-primary-container
             </div>
           </div>
@@ -157,107 +179,107 @@ export default function Home() {
           (such as <code>bg-primary/50</code>). You can specify text color or
           use <code>bg-primary bg-opacity-50</code> instead.
         </p>
-        <details className="border border-outline/20 bg-tertiary-container bg-opacity-30 rounded-lg px-4 py-2 mb-8">
-          <summary className="font-medium text-lg cursor-pointer">
+        <details className="px-4 py-2 mb-8 border rounded-lg border-outline/20 bg-tertiary-container bg-opacity-30">
+          <summary className="text-lg font-medium cursor-pointer">
             Color palette
           </summary>
           <div className="flex flex-wrap my-2 whitespace-nowrap">
-            <div className="bg-primary text-on-primary px-2 py-1 w-1/4">
+            <div className="w-1/4 px-2 py-1 bg-primary text-on-primary">
               primary
             </div>
-            <div className="bg-on-primary text-primary px-2 py-1 w-1/4">
+            <div className="w-1/4 px-2 py-1 bg-on-primary text-primary">
               on-primary
             </div>
-            <div className="bg-primary-container text-on-primary-container px-2 py-1 w-1/4">
+            <div className="w-1/4 px-2 py-1 bg-primary-container text-on-primary-container">
               primary-container
             </div>
-            <div className="bg-on-primary-container text-primary-container px-2 py-1 w-1/4">
+            <div className="w-1/4 px-2 py-1 bg-on-primary-container text-primary-container">
               on-primary-container
             </div>
           </div>
           <div className="flex flex-wrap mb-2 whitespace-nowrap">
-            <div className="bg-secondary text-on-secondary px-2 py-1 w-1/4">
+            <div className="w-1/4 px-2 py-1 bg-secondary text-on-secondary">
               secondary
             </div>
-            <div className="bg-on-secondary text-secondary px-2 py-1 w-1/4">
+            <div className="w-1/4 px-2 py-1 bg-on-secondary text-secondary">
               on-secondary
             </div>
-            <div className="bg-secondary-container text-on-secondary-container px-2 py-1 w-1/4">
+            <div className="w-1/4 px-2 py-1 bg-secondary-container text-on-secondary-container">
               secondary-container
             </div>
-            <div className="bg-on-secondary-container text-secondary-container px-2 py-1 w-1/4">
+            <div className="w-1/4 px-2 py-1 bg-on-secondary-container text-secondary-container">
               on-secondary-container
             </div>
           </div>
           <div className="flex flex-wrap mb-2 whitespace-nowrap">
-            <div className="bg-tertiary text-on-tertiary px-2 py-1 w-1/4">
+            <div className="w-1/4 px-2 py-1 bg-tertiary text-on-tertiary">
               tertiary
             </div>
-            <div className="bg-on-tertiary text-tertiary px-2 py-1 w-1/4">
+            <div className="w-1/4 px-2 py-1 bg-on-tertiary text-tertiary">
               on-tertiary
             </div>
-            <div className="bg-tertiary-container text-on-tertiary-container px-2 py-1 w-1/4">
+            <div className="w-1/4 px-2 py-1 bg-tertiary-container text-on-tertiary-container">
               tertiary-container
             </div>
-            <div className="bg-on-tertiary-container text-tertiary-container px-2 py-1 w-1/4">
+            <div className="w-1/4 px-2 py-1 bg-on-tertiary-container text-tertiary-container">
               on-tertiary-container
             </div>
           </div>
           <div className="flex flex-wrap mb-2 whitespace-nowrap">
-            <div className="bg-error text-on-error px-2 py-1 w-1/4">error</div>
-            <div className="bg-on-error text-error px-2 py-1 w-1/4">
+            <div className="w-1/4 px-2 py-1 bg-error text-on-error">error</div>
+            <div className="w-1/4 px-2 py-1 bg-on-error text-error">
               on-error
             </div>
-            <div className="bg-error-container text-on-error-container px-2 py-1 w-1/4">
+            <div className="w-1/4 px-2 py-1 bg-error-container text-on-error-container">
               error-container
             </div>
-            <div className="bg-on-error-container text-error-container px-2 py-1 w-1/4">
+            <div className="w-1/4 px-2 py-1 bg-on-error-container text-error-container">
               on-error-container
             </div>
           </div>
           <div className="flex flex-wrap mb-2 whitespace-nowrap">
-            <div className="bg-background text-on-background px-2 py-1 w-1/4">
+            <div className="w-1/4 px-2 py-1 bg-background text-on-background">
               background
             </div>
-            <div className="bg-on-background text-background px-2 py-1 w-1/4">
+            <div className="w-1/4 px-2 py-1 bg-on-background text-background">
               on-background
             </div>
-            <div className="bg-surface text-on-surface px-2 py-1 w-1/4">
+            <div className="w-1/4 px-2 py-1 bg-surface text-on-surface">
               surface
             </div>
-            <div className="bg-on-surface text-surface px-2 py-1 w-1/4">
+            <div className="w-1/4 px-2 py-1 bg-on-surface text-surface">
               on-surface
             </div>
           </div>
           <div className="flex flex-wrap mb-2 whitespace-nowrap">
-            <div className="bg-surface-variant text-on-surface-variant px-2 py-1 w-1/4">
+            <div className="w-1/4 px-2 py-1 bg-surface-variant text-on-surface-variant">
               surface-variant
             </div>
-            <div className="bg-on-surface-variant text-surface-variant px-2 py-1 w-1/4">
+            <div className="w-1/4 px-2 py-1 bg-on-surface-variant text-surface-variant">
               on-surface-variant
             </div>
-            <div className="bg-inverse-surface text-on-inverse-surface px-2 py-1 w-1/4">
+            <div className="w-1/4 px-2 py-1 bg-inverse-surface text-on-inverse-surface">
               inverse-surface
             </div>
-            <div className="bg-on-inverse-surface text-inverse-surface px-2 py-1 w-1/4">
+            <div className="w-1/4 px-2 py-1 bg-on-inverse-surface text-inverse-surface">
               on-inverse-surface
             </div>
           </div>
           <div className="flex flex-wrap mb-2 whitespace-nowrap">
-            <div className="bg-outline text-on-surface px-2 py-1 w-1/4">
+            <div className="w-1/4 px-2 py-1 bg-outline text-on-surface">
               outline
             </div>
-            <div className="bg-inverse-primary text-on-surface px-2 py-1 w-1/4">
+            <div className="w-1/4 px-2 py-1 bg-inverse-primary text-on-surface">
               inverse-primary
             </div>
-            <div className="bg-black text-white px-2 py-1 w-1/4">black</div>
-            <div className="bg-white text-black px-2 py-1 w-1/4">white</div>
+            <div className="w-1/4 px-2 py-1 text-white bg-black">black</div>
+            <div className="w-1/4 px-2 py-1 text-black bg-white">white</div>
           </div>
           <div className="flex flex-wrap mb-2 whitespace-nowrap">
-            <div className="transparent text-outline px-2 py-1 w-1/4">
+            <div className="w-1/4 px-2 py-1 transparent text-outline">
               transparent
             </div>
-            <div className="current text-on-tertiary-container px-2 py-1 w-1/4">
+            <div className="w-1/4 px-2 py-1 current text-on-tertiary-container">
               current
             </div>
           </div>
@@ -322,16 +344,16 @@ export default function Home() {
               the background color to the expected result.
             </p>
           </div>
-          <div className="flex-1 w-1/2 flex flex-col">
+          <div className="flex flex-col flex-1 w-1/2">
             <InteractiveElementExample />
           </div>
         </div>
-        <details className="border border-outline/20 bg-tertiary-container bg-opacity-30 rounded-lg px-4 py-2 mb-8">
-          <summary className="font-medium text-lg cursor-pointer">
+        <details className="px-4 py-2 mb-8 border rounded-lg border-outline/20 bg-tertiary-container bg-opacity-30">
+          <summary className="text-lg font-medium cursor-pointer">
             All interactive colors
           </summary>
 
-          <div className="flex flex-wrap flex-1 gap-y-2 my-2">
+          <div className="flex flex-wrap flex-1 my-2 gap-y-2">
             <div className="relative w-1/2 h-20 px-4 py-2 text-lg font-bold interactive-bg-primary">
               Primary
               <div className="absolute text-sm font-normal bottom-2 right-2">
@@ -419,10 +441,10 @@ export default function Home() {
           You can update the generated theme at runtime, directly on client-side
           JavaScript, with the <code>updateTheme</code> function.
         </p>
-        <div className="text-lg font-bold text-tertiary font-mono rounded-t bg-surface-variant inline-block px-2 py-1 mt-6 border-b border-outline/20">
+        <div className="inline-block px-2 py-1 mt-6 font-mono text-lg font-bold border-b rounded-t text-tertiary bg-surface-variant border-outline/20">
           example.js
         </div>
-        <code className="bg-surface-variant text-secondary block rounded-tl-none mb-6 shadow-inner">
+        <code className="block mb-6 rounded-tl-none shadow-inner bg-surface-variant text-secondary">
           <div>
             {
               'import { updateTheme } from "tailwind-material-colors/lib/updateTheme.esm";'
@@ -452,18 +474,18 @@ export default function Home() {
           shades.
         </p>
 
-        <p className="border border-outline/20 bg-secondary-container bg-opacity-30 p-2 rounded">
+        <p className="p-2 border rounded border-outline/20 bg-secondary-container bg-opacity-30">
           <code>updateTheme</code> can't create new colors, only update existing
           ones.
         </p>
 
-        <p className="border border-outline/20 bg-secondary-container bg-opacity-30 p-2 rounded">
+        <p className="p-2 border rounded border-outline/20 bg-secondary-container bg-opacity-30">
           ⚠️ The <code>updateTheme</code> function is around 100KB. If possible,
           load it asynchronously to reduce load times.
         </p>
 
-        <details className="border border-outline/20 bg-tertiary-container bg-opacity-30 rounded-lg px-4 py-2 mb-8">
-          <summary className="font-medium text-lg cursor-pointer">
+        <details className="px-4 py-2 mb-8 border rounded-lg border-outline/20 bg-tertiary-container bg-opacity-30">
+          <summary className="text-lg font-medium cursor-pointer">
             Try dynamic color
           </summary>
           <TryDynamicColor />
