@@ -101,7 +101,7 @@ export default function Home() {
         <code className="block mb-6 rounded-tl-none shadow-inner bg-surface-variant text-secondary">
           <div>
             {
-              "const { withMaterialColors } = require('tailwind-mateiral-colors');"
+              "const { withMaterialColors } = require('tailwind-material-colors');"
             }
           </div>
           <br />
