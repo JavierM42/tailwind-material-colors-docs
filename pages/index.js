@@ -99,7 +99,13 @@ export default function Home() {
           tailwind.config.js
         </div>
         <code className="block mb-6 rounded-tl-none shadow-inner bg-surface-variant text-secondary">
-          <div>{"module.exports = require('tailwind-material-colors')({"}</div>
+          <div>
+            {
+              "const { withMaterialColors } = require('tailwind-mateiral-colors');"
+            }
+          </div>
+          <br />
+          <div>{"module.exports = withMaterialColors({"}</div>
           <div className="pl-6 text-outline/70">
             // Here, your tailwind config.
           </div>
