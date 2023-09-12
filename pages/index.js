@@ -441,7 +441,7 @@ export default function Home() {
           class manually.
         </p>
         <h2>Plugin configuration</h2>
-        <h3>Extendng the Tailwind color palette</h3>
+        <h3>Extending the Tailwind color palette</h3>
         <p>
           The plugin will add colors to the <code>theme.colors</code> key of
           your Tailwind config. Any custom colors already defined there will
