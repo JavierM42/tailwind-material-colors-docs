@@ -105,15 +105,13 @@ export default function Home() {
             }
           </div>
           <br />
-          <div>{"module.exports = withMaterialColors({"}</div>
+          <div>{"const config = {"}</div>
           <div className="pl-6 text-outline/70">
             // Here, your tailwind config.
           </div>
-          <div className="pl-6 text-outline/70">
-            // (Do not specify theme.colors or theme.extend.colors as they will
-            be overwritten).
-          </div>
-          <div>{"}, {"}</div>
+          <div>{"};"}</div>
+          <br />
+          <div>{"module.exports = withMaterialColors(config, {"}</div>
           <div className="pl-6 text-outline/70">
             // Here, your base colors as HEX values
           </div>
@@ -442,6 +440,21 @@ export default function Home() {
           dragging on an element, you'll need to add the <code>-drag</code>{" "}
           class manually.
         </p>
+        <h2>Plugin configuration</h2>
+        <h3>Extendng the Tailwind color palette</h3>
+        <p>
+          The plugin will add colors to the <code>theme.colors</code> key of
+          your Tailwind config. Any custom colors already defined there will
+          remain if there are no name conflicts, but as per the Tailwind docs,
+          this disables the default Tailwind color palette. If you wish to keep
+          it, add <code>{"{ extend: true }"}</code> as a third argument to the{" "}
+          <code>withMaterialColors</code> call.
+        </p>
+        <code className="block mb-6 shadow-inner bg-surface-variant text-secondary">
+          {
+            "module.exports = withMaterialColors(config, colors, { extend: true });"
+          }
+        </code>
         <h2>Dynamic Color</h2>
         <p>
           You can update the generated theme at runtime, directly on client-side
