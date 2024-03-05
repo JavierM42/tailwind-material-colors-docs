@@ -87,8 +87,7 @@ export default function Home() {
             specified).
           </li>
           <li>
-            Dynamic Color: update theme dynamically on the client with a single
-            statement of JavaScript.
+            Dynamic Color: easily update themed dynamically on the client.
           </li>
         </ul>
         <h2>Installation & Usage</h2>
@@ -433,12 +432,10 @@ export default function Home() {
           </div>
         </details>
         <p>
-          The interaction colors are available if you need to apply them
-          manually. Just use the color with a <code>-hover</code>,{" "}
-          <code>-press</code>, <code>-focus</code> or <code>-drag</code> suffix.
-          Since drag states cannot be handled with CSS, if you implement
-          dragging on an element, you'll need to add the <code>-drag</code>{" "}
-          class manually.
+          For drag states, use JavaScript to apply the{" "}
+          <code>dragged-bg-primary</code> class instead of{" "}
+          <code>interactive-bg-primary</code> while the element is being
+          dragged.
         </p>
         <h2>Plugin configuration</h2>
         <h3>Extending the Tailwind color palette</h3>
@@ -488,9 +485,9 @@ export default function Home() {
         </code>
 
         <p>
-          It's recommended to set all colors when changing `primary` because the{" "}
-          <i>harmonize</i> feature (on by default) will affect the resulting
-          shades.
+          It's recommended to set all colors when changing <code>primary</code>{" "}
+          because the <i>harmonize</i> feature (on by default) will affect the
+          resulting shades.
         </p>
 
         <p className="p-2 border rounded border-outline/20 bg-secondary-container bg-opacity-30">
@@ -499,7 +496,7 @@ export default function Home() {
         </p>
 
         <p className="p-2 border rounded border-outline/20 bg-secondary-container bg-opacity-30">
-          ⚠️ The <code>updateTheme</code> function is around 100KB. If possible,
+          ⚠️ The <code>updateTheme</code> function is around 75KB. If possible,
           load it asynchronously to reduce load times.
         </p>
 
