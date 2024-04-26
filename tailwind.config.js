@@ -15,5 +15,9 @@ module.exports = withMaterialColors(
   },
   {
     primary: "#506546",
+  },
+  {
+    scheme: "content",
+    // contrast: 0,
   }
 );

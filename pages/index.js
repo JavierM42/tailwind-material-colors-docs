@@ -2,8 +2,11 @@ import Head from "next/head";
 import InteractiveElementExample from "../components/InteractiveElementExample";
 import InteractiveElementExplanation from "../components/InteractiveElementExplanation";
 import TryDynamicColor from "../components/TryDynamicColor";
+import { useState } from "react";
 
 export default function Home() {
+  const [showControls, setShowControls] = useState(false);
+
   return (
     <>
       <Head>
@@ -35,11 +38,12 @@ export default function Home() {
         <meta name="theme-color" content="#ffffff" />
       </Head>
 
-      <main className="max-w-3xl px-4 pt-20 mx-auto">
-        <h1 className="text-transparent bg-gradient-to-r bg-clip-text from-tertiary to-secondary via-primary">
+      <main className="max-w-3xl px-4 py-20 mx-auto">
+        <h1 className="flex text-transparent bg-gradient-to-r bg-clip-text from-secondary via-tertiary-container to-inverse-primary drop-shadow">
           Tailwind Material Colors
+          <span className="inline-block text-4xl font-bold ml-1 mt-9">v3</span>
         </h1>
-        <ul className="flex items-center justify-center gap-3 mb-12 font-bold">
+        <ul className="flex items-center justify-center gap-3 mb-12 font-bold -mt-4">
           <li>
             <a
               href="https://npmjs.com/package/tailwind-material-colors"
@@ -74,27 +78,23 @@ export default function Home() {
 
         <h2>Key features</h2>
         <ul className="space-y-2 list-disc">
-          <li>Generate a color theme from one, two or three base colors.</li>
+          <li>Generate a color theme from a theme name and base color.</li>
+          <li>Customize contrast and/or secondary colors.</li>
           <li>
             Automatic dark mode, no need to use the <code>dark:</code> variant.
           </li>
           <li>
             Easy and consistent interaction states (hover, press, focus,
-            disabled) with <code>interactive-bg-</code>.
+            disabled) with the <code>interactive-bg-</code> classes.
           </li>
-          <li>
-            Extra colors will be harmonized to the primary color (except if
-            specified).
-          </li>
-          <li>
-            Dynamic Color: easily update themed dynamically on the client.
-          </li>
+          <li>Extra colors will be harmonized to the primary color.</li>
+          <li>Dynamic Color: easily update theme dynamically on the client.</li>
         </ul>
         <h2>Installation & Usage</h2>
         <pre>
           <code>npm install --save-dev tailwind-material-colors</code>
         </pre>
-        <div className="inline-block px-2 py-1 mt-6 font-mono text-lg font-bold border-b rounded-t text-tertiary bg-surface-variant border-outline/20">
+        <div className="inline-block px-2 py-1 mt-4 font-mono text-lg font-bold border-b rounded-t text-tertiary bg-surface-variant border-outline/20">
           tailwind.config.js
         </div>
         <code className="block mb-6 rounded-tl-none shadow-inner bg-surface-variant text-secondary">
@@ -105,39 +105,46 @@ export default function Home() {
           </div>
           <br />
           <div>{"const config = {"}</div>
-          <div className="pl-6 text-outline/70">
-            // Here, your tailwind config.
-          </div>
+          <div className="pl-6 text-outline/70">// Your tailwind config.</div>
           <div>{"};"}</div>
           <br />
           <div>{"module.exports = withMaterialColors(config, {"}</div>
           <div className="pl-6 text-outline/70">
-            // Here, your base colors as HEX values
-          </div>
-          <div className="pl-6 text-outline/70">// primary is required</div>
-          <div className="pl-6 text-outline/70">
-            // secondary and/or tertiary are optional, if not set they will be
-            derived from the primary color
+            // Your base colors as HEX values. 'primary' is required.
           </div>
           <div className="pl-6">primary: '#ff0000',</div>
+          <div className="pl-6 text-outline/70">
+            // secondary and/or tertiary are optional, if not set they will be
+            derived from the primary color.
+          </div>
           <div className="pl-6">secondary: '#ffff00',</div>
           <div className="pl-6">tertiary: '#0000ff',</div>
           <div className="pl-6 text-outline/70">
-            // extra named colors may also be included
+            // add any named colors you need:
           </div>
           <div className="pl-6">green: '#00ff00'</div>
           <div className="pl-6">blue: '#0000ff'</div>
+          <div>{"},"}</div>
+          <div>{"{,"}</div>
+          <div className="pl-6 text-outline/70">
+            /* one of 'content', 'expressive', 'fidelity', 'monochrome',
+            'neutral', 'tonalSpot' or 'vibrant' */
+          </div>
+          <div className="pl-6">{"scheme: 'content',"}</div>
+          <div className="pl-6 text-outline/70">
+            // contrast is optional and ranges from -1 (less contrast) to 1
+            (more contrast).
+          </div>
+          <div className="pl-6">{"contrast: 0,"}</div>
           <div>{"});"}</div>
         </code>
         <p>
           The colors you supply will be transformed by M3. In the example
           configuration above, where the provided <code>primary</code>{" "}
-          <i>base</i> color is pure red (
-          <code className="text-[#ff0000]">#ff0000</code>), the resulting{" "}
-          primary colors are <code className="text-[#c00100]">#c00100</code> and{" "}
-          <code className="text-[#ffb4a8]">#ffb4a8</code> for light and dark
-          mode respectively. This is an intentional effect of the M3 algorithm
-          in the interest of good contrast ratios and pleasing aesthetics.
+          <i>base</i> color is <code className="text-[#ff0000]">pure red</code>,
+          the resulting primary colors won't be, but they <i>will</i> have a red
+          hue. This is an intentional effect of the M3 algorithm in the interest
+          of good contrast ratios and pleasing aesthetics.
         </p>
         <p>
           If you don't want a color to be harmonized to the primary color, pass{" "}
@@ -149,156 +156,167 @@ export default function Home() {
           <span className="text-secondary">1.</span> A Tailwind color palette
         </h3>
         <p>
-          The plugin will generate a color palette. Most of the colors on it
-          have an <i>on-color</i> counterpart. <code>on-X</code> is the default
-          color of content inside an element with background color{" "}
-          <code>X</code>.
+          The plugin will generate a color palette, structured like the one from
+          the{" "}
+          <a href="https://material-foundation.github.io/material-theme-builder/">
+            Material Theme Builder
+          </a>
+          .
         </p>
-        <div className="flex gap-8 mb-6">
-          <div className="flex-1">
-            <p>
-              For example, an element with a <code>primary-container</code>{" "}
-              background will have <code>on-primary-container</code> content.
-            </p>
-            <p>
-              When you use the <code>.bg-primary-container</code> class, the
-              default text color will be set to{" "}
-              <code>on-primary-container</code>.
-            </p>
+        <div className="grid gap-1 grid-cols-4 text-xs mb-4" id="palette">
+          <div className="bg-primary h-20 px-1 py-0.5">Primary</div>
+          <div className="bg-secondary h-20 px-1 py-0.5">Secondary</div>
+          <div className="bg-tertiary h-20 px-1 py-0.5">Tertiary</div>
+          <div className="bg-error h-20 px-1 py-0.5">Error</div>
+
+          <div className="bg-on-primary text-primary h-6 px-1 py-0.5">
+            On Primary
           </div>
-          <div className="relative flex flex-col items-center justify-center flex-1 w-1/2 px-2 py-1 bg-primary-container">
-            <div>Default content (on-primary-container)</div>
-            <div className="text-outline">
-              Content with <span className="font-mono">.text-outline</span>{" "}
-              class
+          <div className="bg-on-secondary text-secondary h-6 px-1 py-0.5">
+            On Secondary
+          </div>
+          <div className="bg-on-tertiary text-tertiary h-6 px-1 py-0.5">
+            On Tertiary
+          </div>
+          <div className="bg-on-error text-error h-6 px-1 py-0.5">On Error</div>
+
+          <div className="bg-primary-container h-20 px-1 py-0.5">
+            Primary Container
+          </div>
+          <div className="bg-secondary-container h-20 px-1 py-0.5">
+            Secondary Container
+          </div>
+          <div className="bg-tertiary-container h-20 px-1 py-0.5">
+            Tertiary Container
+          </div>
+          <div className="bg-error-container h-20 px-1 py-0.5">
+            Error Container
+          </div>
+
+          <div className="bg-on-primary-container text-primary-container h-6 px-1 py-0.5">
+            On Primary Container
+          </div>
+          <div className="bg-on-secondary-container text-secondary-container h-6 px-1 py-0.5">
+            On Secondary Container
+          </div>
+          <div className="bg-on-tertiary-container text-tertiary-container h-6 px-1 py-0.5">
+            On Tertiary Container
+          </div>
+          <div className="bg-on-error-container text-error-container h-6 px-1 py-0.5">
+            On Error Container
+          </div>
+
+          <div className="bg-surface-dim h-20 px-1 py-0.5">Surface Dim</div>
+          <div className="bg-surface h-20 px-1 py-0.5">Surface</div>
+          <div className="bg-surface-bright h-20 px-1 py-0.5">
+            Surface Bright
+          </div>
+          <div className="bg-inverse-surface h-20 px-1 py-0.5">
+            Inverse Surface
+          </div>
+
+          <div className="col-span-3 grid grid-cols-5 gap-1">
+            <div className="bg-surface-container-loset h-20 px-1 py-0.5">
+              Surface Container Lowest
             </div>
-            <div className="absolute text-xs bottom-2 right-2">
-              .bg-primary-container
+            <div className="bg-surface-container-low h-20 px-1 py-0.5">
+              Surface Container Low
             </div>
+            <div className="bg-surface-container h-20 px-1 py-0.5">
+              Surface Container
+            </div>
+            <div className="bg-surface-container-high h-20 px-1 py-0.5">
+              Surface Container High
+            </div>
+            <div className="bg-surface-container-highest h-20 px-1 py-0.5">
+              Surface Container Highest
+            </div>
+          </div>
+          <div className="space-y-1">
+            <div className="bg-on-inverse-surface h-6 px-1 py-0.5">
+              On Inverse Surface
+            </div>
+            <div className="bg-surface-variant h-6 px-1 py-0.5">
+              Surface Variant
+            </div>
+            <div className="bg-inverse-primary surface h-6 px-1 py-0.5">
+              Inverse Primary
+            </div>
+          </div>
+
+          <div className="bg-on-surface text-surface h-6 px-1 py-0.5">
+            On Surface
+          </div>
+          <div className="bg-on-surface-variant text-surface-variant h-6 px-1 py-0.5">
+            On Surface Variant
+          </div>
+          <div className="bg-outline text-on-surface h-6 px-1 py-0.5">
+            Outline
+          </div>
+          <div className="bg-outline-variant text-on-surface h-6 px-1 py-0.5">
+            Outline Variant
           </div>
         </div>
-        <p>
-          Default content color will not be set when using opacity modifiers
-          (such as <code>bg-primary/50</code>). You can specify text color or
-          use <code>bg-primary bg-opacity-50</code> instead.
-        </p>
-        <details className="px-4 py-2 mb-8 border rounded-lg border-outline/20 bg-tertiary-container bg-opacity-30">
-          <summary className="text-lg font-medium cursor-pointer">
-            Color palette
-          </summary>
-          <div className="flex flex-wrap my-2 whitespace-nowrap">
-            <div className="w-1/4 px-2 py-1 bg-primary text-on-primary">
-              primary
-            </div>
-            <div className="w-1/4 px-2 py-1 bg-on-primary text-primary">
-              on-primary
-            </div>
-            <div className="w-1/4 px-2 py-1 bg-primary-container text-on-primary-container">
-              primary-container
-            </div>
-            <div className="w-1/4 px-2 py-1 bg-on-primary-container text-primary-container">
-              on-primary-container
-            </div>
-          </div>
-          <div className="flex flex-wrap mb-2 whitespace-nowrap">
-            <div className="w-1/4 px-2 py-1 bg-secondary text-on-secondary">
-              secondary
-            </div>
-            <div className="w-1/4 px-2 py-1 bg-on-secondary text-secondary">
-              on-secondary
-            </div>
-            <div className="w-1/4 px-2 py-1 bg-secondary-container text-on-secondary-container">
-              secondary-container
-            </div>
-            <div className="w-1/4 px-2 py-1 bg-on-secondary-container text-secondary-container">
-              on-secondary-container
-            </div>
-          </div>
-          <div className="flex flex-wrap mb-2 whitespace-nowrap">
-            <div className="w-1/4 px-2 py-1 bg-tertiary text-on-tertiary">
-              tertiary
-            </div>
-            <div className="w-1/4 px-2 py-1 bg-on-tertiary text-tertiary">
-              on-tertiary
-            </div>
-            <div className="w-1/4 px-2 py-1 bg-tertiary-container text-on-tertiary-container">
-              tertiary-container
-            </div>
-            <div className="w-1/4 px-2 py-1 bg-on-tertiary-container text-tertiary-container">
-              on-tertiary-container
-            </div>
-          </div>
-          <div className="flex flex-wrap mb-2 whitespace-nowrap">
-            <div className="w-1/4 px-2 py-1 bg-error text-on-error">error</div>
-            <div className="w-1/4 px-2 py-1 bg-on-error text-error">
-              on-error
-            </div>
-            <div className="w-1/4 px-2 py-1 bg-error-container text-on-error-container">
-              error-container
-            </div>
-            <div className="w-1/4 px-2 py-1 bg-on-error-container text-error-container">
-              on-error-container
-            </div>
-          </div>
-          <div className="flex flex-wrap mb-2 whitespace-nowrap">
-            <div className="w-1/4 px-2 py-1 bg-background text-on-background">
-              background
-            </div>
-            <div className="w-1/4 px-2 py-1 bg-on-background text-background">
-              on-background
-            </div>
-            <div className="w-1/4 px-2 py-1 bg-surface text-on-surface">
-              surface
-            </div>
-            <div className="w-1/4 px-2 py-1 bg-on-surface text-surface">
-              on-surface
-            </div>
-          </div>
-          <div className="flex flex-wrap mb-2 whitespace-nowrap">
-            <div className="w-1/4 px-2 py-1 bg-surface-variant text-on-surface-variant">
-              surface-variant
-            </div>
-            <div className="w-1/4 px-2 py-1 bg-on-surface-variant text-surface-variant">
-              on-surface-variant
-            </div>
-            <div className="w-1/4 px-2 py-1 bg-inverse-surface text-on-inverse-surface">
-              inverse-surface
-            </div>
-            <div className="w-1/4 px-2 py-1 bg-on-inverse-surface text-inverse-surface">
-              on-inverse-surface
-            </div>
-          </div>
-          <div className="flex flex-wrap mb-2 whitespace-nowrap">
-            <div className="w-1/4 px-2 py-1 bg-outline text-on-surface">
-              outline
-            </div>
-            <div className="w-1/4 px-2 py-1 bg-inverse-primary text-on-surface">
-              inverse-primary
-            </div>
-            <div className="w-1/4 px-2 py-1 text-white bg-black">black</div>
-            <div className="w-1/4 px-2 py-1 text-black bg-white">white</div>
-          </div>
-          <div className="flex flex-wrap mb-2 whitespace-nowrap">
-            <div className="w-1/4 px-2 py-1 transparent text-outline">
-              transparent
-            </div>
-            <div className="w-1/4 px-2 py-1 current text-on-tertiary-container">
-              current
-            </div>
-          </div>
-        </details>
+
+        {showControls && <TryDynamicColor />}
+
         <p>
           The generated colors can be used with any of Tailwind's usual
           utilities (such as <code>bg-</code>, <code>text-</code>,{" "}
           <code>border-</code>, <code>fill-</code>, <code>stroke-</code>, or{" "}
           <code>shadow-</code>).
         </p>
+
         <h3>
-          <span className="text-secondary">2.</span> Automatic dark mode
+          <span className="text-secondary">2.</span> Automatic surface/content
+          color pairs
         </h3>
         <p>
-          All the generated colors will automatically switch to their dark mode
-          shades based on your defined{" "}
+          Most of the colors on the palette have an <i>on-color</i> counterpart.{" "}
+          <code>on-X</code> is the default color of content inside an element
+          with background color <code>X</code>.
+        </p>
+        <div className="flex gap-8 mb-6">
+          <div className="flex-1">
+            <p>
+              For example, an element with a <code>primary-container</code>{" "}
+              background will get <code>on-primary-container</code> content.
+            </p>
+            <p>
+              A <code>bg-</code> class will suffice to style both background and
+              text color on most use cases.
+            </p>
+          </div>
+          <figure className="relative flex flex-col items-center justify-center flex-1 w-1/2 px-2 py-1 bg-primary-container">
+            <div className="text-center">
+              Text color is <code>on-primary-container</code> by default
+            </div>
+            <div className="absolute text-xs bottom-2 right-2">
+              .bg-primary-container
+            </div>
+          </figure>
+        </div>
+        <ul className="space-y-2 mb-4">
+          <li className="bg-surface-container-high p-2 rounded">
+            All the surface colors set <code>on-surface</code> as their text
+            color, except for <code>surface-variant</code>.
+          </li>
+          <li className="bg-surface-container-high p-2 rounded">
+            <i>on-colors</i> won't set the content color when used as a
+            background.
+          </li>
+          <li className="bg-surface-container-high p-2 rounded">
+            Text color will not be set when using opacity modifiers (such as{" "}
+            <code>bg-primary/50</code>). You can specify text color manually or
+            use <code>bg-primary bg-opacity-50</code> instead.
+          </li>
+        </ul>
+        <h3>
+          <span className="text-secondary">3.</span> Automatic dark mode
+        </h3>
+        <p>
+          All the generated colors have both light and dark mode shades. Based
+          on your defined{" "}
           <a
             href="https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually"
             target="_blank"
@@ -306,8 +324,9 @@ export default function Home() {
           >
             Dark Mode Strategy
           </a>
-          , be it CSS <code>prefers-color-scheme</code> or a custom class.
-          There's no need to use the <code>dark:</code> variant.
+          , be it CSS <code>prefers-color-scheme</code> or a custom selector,
+          they will change automatically. There's no need to use the{" "}
+          <code>dark:</code> variant.
         </p>
         <p>You can try it right here:</p>
         <div className="flex justify-center mb-8">
@@ -319,7 +338,7 @@ export default function Home() {
           </button>
         </div>
         <h3>
-          <span className="text-secondary">3.</span> Interaction states
+          <span className="text-secondary">4.</span> Interaction states
         </h3>
         <p>
           This plugin provides easy to use interaction states that follow the{" "}
@@ -329,8 +348,8 @@ export default function Home() {
             rel="noreferrer"
           >
             M3 guidelines
-          </a>{" "}
-          on that topic. For every color with an <i>on-color</i> counterpart, an{" "}
+          </a>
+          . For every color with an <i>on-color</i> counterpart, an{" "}
           <code>interactive-bg-</code> utility will be generated.
         </p>
         <p>
@@ -356,77 +375,64 @@ export default function Home() {
             All interactive colors
           </summary>
 
-          <div className="flex flex-wrap flex-1 my-2 gap-y-2">
-            <div className="relative w-1/2 h-20 px-4 py-2 text-lg font-bold interactive-bg-primary">
-              Primary
-              <div className="absolute text-sm font-normal bottom-2 right-2">
-                .interactive-bg-primary
-              </div>
+          <div className="grid gap-1 grid-cols-4 text-xs my-2">
+            <div className="interactive-bg-primary h-20 px-1 py-0.5">
+              .interactive-bg-primary
             </div>
-            <div className="relative w-1/2 h-20 px-4 py-2 text-lg font-bold interactive-bg-primary-container">
-              Primary Container
-              <div className="absolute text-sm font-normal bottom-2 right-2">
-                .interactive-bg-primary-container
-              </div>
+            <div className="interactive-bg-secondary h-20 px-1 py-0.5">
+              .interactive-bg-secondary
             </div>
-            <div className="relative w-1/2 h-20 px-4 py-2 text-lg font-bold interactive-bg-secondary">
-              Secondary
-              <div className="absolute text-sm font-normal bottom-2 right-2">
-                .interactive-bg-secondary
-              </div>
+            <div className="interactive-bg-tertiary h-20 px-1 py-0.5">
+              .interactive-bg-tertiary
             </div>
-            <div className="relative w-1/2 h-20 px-4 py-2 text-lg font-bold interactive-bg-secondary-container">
-              Secondary Container
-              <div className="absolute text-sm font-normal bottom-2 right-2">
-                .interactive-bg-secondary-container
-              </div>
+            <div className="interactive-bg-error h-20 px-1 py-0.5">
+              .interactive-bg-error
             </div>
-            <div className="relative w-1/2 h-20 px-4 py-2 text-lg font-bold interactive-bg-tertiary">
-              Tertiary
-              <div className="absolute text-sm font-normal bottom-2 right-2">
-                .interactive-bg-tertiary
-              </div>
+
+            <div className="interactive-bg-primary-container h-20 px-1 py-0.5">
+              .interactive-bg-primary-container
             </div>
-            <div className="relative w-1/2 h-20 px-4 py-2 text-lg font-bold interactive-bg-tertiary-container">
-              Tertiary Container
-              <div className="absolute text-sm font-normal bottom-2 right-2">
-                .interactive-bg-tertiary-container
-              </div>
+            <div className="interactive-bg-secondary-container h-20 px-1 py-0.5">
+              .interactive-bg-secondary-container
             </div>
-            <div className="relative w-1/2 h-20 px-4 py-2 text-lg font-bold interactive-bg-error">
-              Error
-              <div className="absolute text-sm font-normal bottom-2 right-2">
-                .interactive-bg-error
-              </div>
+            <div className="interactive-bg-tertiary-container h-20 px-1 py-0.5">
+              .interactive-bg-tertiary-container
             </div>
-            <div className="relative w-1/2 h-20 px-4 py-2 text-lg font-bold interactive-bg-error-container">
-              Error Container
-              <div className="absolute text-sm font-normal bottom-2 right-2">
-                .interactive-bg-error-container
-              </div>
+            <div className="interactive-bg-error-container h-20 px-1 py-0.5">
+              .interactive-bg-error-container
             </div>
-            <div className="relative w-1/2 h-20 px-4 py-2 text-lg font-bold interactive-bg-background">
-              Background
-              <div className="absolute text-sm font-normal bottom-2 right-2">
-                .interactive-bg-background
-              </div>
+
+            <div className="interactive-bg-surface-dim h-20 px-1 py-0.5">
+              .interactive-bg-surface-dim
             </div>
-            <div className="relative w-1/2 h-20 px-4 py-2 text-lg font-bold interactive-bg-surface">
-              Surface
-              <div className="absolute text-sm font-normal bottom-2 right-2">
-                .interactive-bg-surface
-              </div>
+            <div className="interactive-bg-surface h-20 px-1 py-0.5">
+              .interactive-bg-surface
             </div>
-            <div className="relative w-1/2 h-20 px-4 py-2 text-lg font-bold interactive-bg-surface-variant">
-              Surface Variant
-              <div className="absolute text-sm font-normal bottom-2 right-2">
+            <div className="interactive-bg-surface-bright h-20 px-1 py-0.5">
+              .interactive-bg-surface-bright
+            </div>
+            <div className="interactive-bg-inverse-surface h-20 px-1 py-0.5">
+              .interactive-bg-inverse-surface
+            </div>
+
+            <div className="col-span-4 grid grid-cols-6 gap-1">
+              <div className="interactive-bg-surface-container-lowest h-20 px-1 py-0.5">
+                .interactive-bg-surface-container-lowest
+              </div>
+              <div className="interactive-bg-surface-container-low h-20 px-1 py-0.5">
+                .interactive-bg-surface-container-low
+              </div>
+              <div className="interactive-bg-surface-container h-20 px-1 py-0.5">
+                .interactive-bg-surface-container
+              </div>
+              <div className="interactive-bg-surface-container-high h-20 px-1 py-0.5">
+                .interactive-bg-surface-container-high
+              </div>
+              <div className="interactive-bg-surface-container-highest h-20 px-1 py-0.5">
+                .interactive-bg-surface-container-highest
+              </div>
+              <div className="interactive-bg-surface-variant h-20 px-1 py-0.5">
                 .interactive-bg-surface-variant
-              </div>
-            </div>
-            <div className="relative w-1/2 h-20 px-4 py-2 text-lg font-bold interactive-bg-inverse-surface">
-              Inverse Surface
-              <div className="absolute text-sm font-normal bottom-2 right-2">
-                .interactive-bg-inverse-surface
               </div>
             </div>
           </div>
@@ -444,12 +450,13 @@ export default function Home() {
           your Tailwind config. Any custom colors already defined there will
           remain if there are no name conflicts, but as per the Tailwind docs,
           this disables the default Tailwind color palette. If you wish to keep
-          it, add <code>{"{ extend: true }"}</code> as a third argument to the{" "}
+          it, add <code>{"{ extend: true }"}</code> within the third argument of
+          the
           <code>withMaterialColors</code> call.
         </p>
         <code className="block mb-6 shadow-inner bg-surface-variant text-secondary">
           {
-            "module.exports = withMaterialColors(config, colors, { extend: true });"
+            "module.exports = withMaterialColors(config, colors, { scheme: 'content', extend: true });"
           }
         </code>
         <h2>Dynamic Color</h2>
@@ -457,7 +464,22 @@ export default function Home() {
           You can update the generated theme at runtime, directly on client-side
           JavaScript, with the <code>updateTheme</code> function.
         </p>
-        <div className="inline-block px-2 py-1 mt-6 font-mono text-lg font-bold border-b rounded-t text-tertiary bg-surface-variant border-outline/20">
+        {!showControls && (
+          <div className="flex justify-center mb-8">
+            <button
+              className="px-4 py-2 font-bold rounded-md shadow shadow-primary/30 interactive-bg-primary"
+              onClick={() => {
+                document
+                  .getElementById("palette")
+                  .scrollIntoView({ behavior: "smooth" });
+                setShowControls(true);
+              }}
+            >
+              Try Dynamic Color
+            </button>
+          </div>
+        )}
+        <div className="inline-block px-2 py-1 mt-4 font-mono text-lg font-bold border-b rounded-t text-tertiary bg-surface-variant border-outline/20">
           example.js
         </div>
         <code className="block mb-6 rounded-tl-none shadow-inner bg-surface-variant text-secondary">
@@ -480,7 +502,15 @@ export default function Home() {
             // second argument is your chosen dark mode strategy (usually
             'media' or 'class')
           </div>
-          <div className="pl-6">'media'</div>
+          <div className="pl-6">'media',</div>
+          <div className="pl-6 text-outline/70">
+            // third argument is the scheme
+          </div>
+          <div className="pl-6">'tonalSpot'</div>
+          <div className="pl-6 text-outline/70">
+            // fourth argument specifies contrast (optional)
+          </div>
+          <div className="pl-6">0</div>
           <div>{");"}</div>
         </code>
 
@@ -490,23 +520,23 @@ export default function Home() {
           resulting shades.
         </p>
 
-        <p className="p-2 border rounded border-outline/20 bg-secondary-container bg-opacity-30">
-          <code>updateTheme</code> can't create new colors, only update existing
-          ones.
-        </p>
-
-        <p className="p-2 border rounded border-outline/20 bg-secondary-container bg-opacity-30">
-          ⚠️ The <code>updateTheme</code> function is around 75KB. If possible,
-          load it asynchronously to reduce load times.
-        </p>
-
-        <details className="px-4 py-2 mb-8 border rounded-lg border-outline/20 bg-tertiary-container bg-opacity-30">
-          <summary className="text-lg font-medium cursor-pointer">
-            Try dynamic color
-          </summary>
-          <TryDynamicColor />
-        </details>
+        <ul className="space-y-2 mb-4">
+          <li className="bg-surface-container-high p-2 rounded">
+            <code>updateTheme</code> can't create new colors, only update
+            existing ones.
+          </li>
+          <li className="bg-surface-container-high p-2 rounded">
+            ⚠The <code>updateTheme</code> function is around 85KB. If possible,
+            load it asynchronously to reduce load times.
+          </li>
+        </ul>
       </main>
+      <footer className="text-center py-10">
+        Made with ❤️ by{" "}
+        <a href="https://javiermorales.dev" target="_blank" rel="noreferrer">
+          Javier Morales
+        </a>
+      </footer>
     </>
   );
 }
