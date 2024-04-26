@@ -64,7 +64,7 @@ const TryDynamicColor = () => {
               <input
                 type="color"
                 value={secondary}
-                className="w-24 h-9 px-0 py-0.5 rounded-md shadow interactive-bg-surface cursor-pointer"
+                className="w-24 h-9 px-1 py-0.5 rounded-md shadow interactive-bg-surface cursor-pointer"
                 onChange={(e) => setSecondary(e.target.value)}
               />
             )}
