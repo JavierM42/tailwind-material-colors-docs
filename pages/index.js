@@ -122,10 +122,10 @@ export default function Home() {
           <div className="pl-6 text-outline/70">
             // add any named colors you need:
           </div>
-          <div className="pl-6">green: '#00ff00'</div>
+          <div className="pl-6">green: '#00ff00',</div>
           <div className="pl-6">blue: '#0000ff'</div>
           <div>{"},"}</div>
-          <div>{"{,"}</div>
+          <div>{"{"}</div>
           <div className="pl-6 text-outline/70">
             /* one of 'content', 'expressive', 'fidelity', 'monochrome',
             'neutral', 'tonalSpot' or 'vibrant' */
