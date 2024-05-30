@@ -11,7 +11,7 @@ module.exports = withMaterialColors(
       extend: {},
     },
     plugins: [],
-    darkMode: "class",
+    darkMode: "selector",
   },
   {
     primary: "#506546",
