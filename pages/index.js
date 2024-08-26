@@ -41,9 +41,9 @@ export default function Home() {
       <main className="max-w-3xl px-4 py-20 mx-auto">
         <h1 className="flex text-transparent bg-gradient-to-r bg-clip-text from-secondary via-tertiary-container to-inverse-primary drop-shadow">
           Tailwind Material Colors
-          <span className="inline-block text-4xl font-bold ml-1 mt-9">v3</span>
+          <span className="inline-block ml-1 text-4xl font-bold mt-9">v3</span>
         </h1>
-        <ul className="flex items-center justify-center gap-3 mb-12 font-bold -mt-4">
+        <ul className="flex items-center justify-center gap-3 mb-12 -mt-4 font-bold">
           <li>
             <a
               href="https://npmjs.com/package/tailwind-material-colors"
@@ -163,7 +163,7 @@ export default function Home() {
           </a>
           .
         </p>
-        <div className="grid gap-1 grid-cols-4 text-xs mb-4" id="palette">
+        <div className="grid grid-cols-4 gap-1 mb-4 text-xs" id="palette">
           <div className="bg-primary h-20 px-1 py-0.5">Primary</div>
           <div className="bg-secondary h-20 px-1 py-0.5">Secondary</div>
           <div className="bg-tertiary h-20 px-1 py-0.5">Tertiary</div>
@@ -215,7 +215,7 @@ export default function Home() {
             Inverse Surface
           </div>
 
-          <div className="col-span-3 grid grid-cols-5 gap-1">
+          <div className="grid grid-cols-5 col-span-3 gap-1">
             <div className="bg-surface-container-loset h-20 px-1 py-0.5">
               Surface Container Lowest
             </div>
@@ -244,17 +244,20 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="bg-on-surface text-surface h-6 px-1 py-0.5">
-            On Surface
-          </div>
-          <div className="bg-on-surface-variant text-surface-variant h-6 px-1 py-0.5">
-            On Surface Variant
-          </div>
-          <div className="bg-outline text-on-surface h-6 px-1 py-0.5">
-            Outline
-          </div>
-          <div className="bg-outline-variant text-on-surface h-6 px-1 py-0.5">
-            Outline Variant
+          <div className="grid grid-cols-5 col-span-4 gap-1">
+            <div className="bg-on-surface text-surface h-6 px-1 py-0.5">
+              On Surface
+            </div>
+            <div className="bg-on-surface-variant text-surface-variant h-6 px-1 py-0.5">
+              On Surface Variant
+            </div>
+            <div className="bg-outline text-on-surface h-6 px-1 py-0.5">
+              Outline
+            </div>
+            <div className="bg-outline-variant text-on-surface h-6 px-1 py-0.5">
+              Outline Variant
+            </div>
+            <div className="bg-scrim text-[#ffffff] h-6 px-1 py-0.5">Scrim</div>
           </div>
         </div>
 
@@ -296,16 +299,16 @@ export default function Home() {
             </div>
           </figure>
         </div>
-        <ul className="space-y-2 mb-4">
-          <li className="bg-surface-container-high p-2 rounded">
+        <ul className="mb-4 space-y-2">
+          <li className="p-2 rounded bg-surface-container-high">
             All the surface colors set <code>on-surface</code> as their text
             color, except for <code>surface-variant</code>.
           </li>
-          <li className="bg-surface-container-high p-2 rounded">
+          <li className="p-2 rounded bg-surface-container-high">
             <i>on-colors</i> won't set the content color when used as a
             background.
           </li>
-          <li className="bg-surface-container-high p-2 rounded">
+          <li className="p-2 rounded bg-surface-container-high">
             Text color will not be set when using opacity modifiers (such as{" "}
             <code>bg-primary/50</code>). You can specify text color manually or
             use <code>bg-primary bg-opacity-50</code> instead.
@@ -375,7 +378,7 @@ export default function Home() {
             All interactive colors
           </summary>
 
-          <div className="grid gap-1 grid-cols-4 text-xs my-2">
+          <div className="grid grid-cols-4 gap-1 my-2 text-xs">
             <div className="interactive-bg-primary h-20 px-1 py-0.5">
               .interactive-bg-primary
             </div>
@@ -415,7 +418,7 @@ export default function Home() {
               .interactive-bg-inverse-surface
             </div>
 
-            <div className="col-span-4 grid grid-cols-6 gap-1">
+            <div className="grid grid-cols-6 col-span-4 gap-1">
               <div className="interactive-bg-surface-container-lowest h-20 px-1 py-0.5">
                 .interactive-bg-surface-container-lowest
               </div>
@@ -520,18 +523,18 @@ export default function Home() {
           resulting shades.
         </p>
 
-        <ul className="space-y-2 mb-4">
-          <li className="bg-surface-container-high p-2 rounded">
+        <ul className="mb-4 space-y-2">
+          <li className="p-2 rounded bg-surface-container-high">
             <code>updateTheme</code> can't create new colors, only update
             existing ones.
           </li>
-          <li className="bg-surface-container-high p-2 rounded">
+          <li className="p-2 rounded bg-surface-container-high">
             ⚠The <code>updateTheme</code> function is around 85KB. If possible,
             load it asynchronously to reduce load times.
           </li>
         </ul>
       </main>
-      <footer className="text-center py-10">
+      <footer className="py-10 text-center">
         Made with ❤️ by{" "}
         <a href="https://javiermorales.dev" target="_blank" rel="noreferrer">
           Javier Morales
