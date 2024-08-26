@@ -64,7 +64,7 @@ export default function Home() {
           </li>
         </ul>
 
-        <p>
+        <p className="bg-[#123123]">
           A{" "}
           <a href="https://tailwindcss.com" target="_blank" rel="noreferrer">
             TailwindCSS
@@ -533,6 +533,11 @@ export default function Home() {
             load it asynchronously to reduce load times.
           </li>
         </ul>
+        <h2>Known issues</h2>
+        <p>
+          Arbitrary background colors such as <code>bg-[#000000]</code> don't
+          work when you use this plugin.
+        </p>
       </main>
       <footer className="py-10 text-center">
         Made with ❤️ by{" "}
