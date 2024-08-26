@@ -244,7 +244,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid grid-cols-5 col-span-4 gap-1">
+          <div className="grid grid-cols-6 col-span-4 gap-1">
             <div className="bg-on-surface text-surface h-6 px-1 py-0.5">
               On Surface
             </div>
@@ -258,6 +258,9 @@ export default function Home() {
               Outline Variant
             </div>
             <div className="bg-scrim text-[#ffffff] h-6 px-1 py-0.5">Scrim</div>
+            <div className="bg-shadow text-[#ffffff] h-6 px-1 py-0.5">
+              Shadow
+            </div>
           </div>
         </div>
 
